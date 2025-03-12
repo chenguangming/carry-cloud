@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name">CarryCloud</string>
+    <string name="slogan">Carry Cloud In Pocket</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Text</string>
+    <string name="hex">HEX</string>
+    <string name="send_input_hint">Send Text to PC</string>
+    <string name="send">Send</string>
+    <string name="warning">Warning</string>
+    <string name="modify_warning">Don\'t modify unless it you understand the operation</string>
+    <string name="wifi_disconnected">Please Connect to any WLAN or LAN first</string>
+
+    <string name="notification_permission_toast">No notification permission</string>
+    <string name="no_storage_permission_toast">No storage permission</string>
+    <string name="stopped">stopped</string>
+    <string name="start">start</string>
+    <string name="cancel">CANCEL</string>
+    <string name="never">NEVER</string>
+    <string name="ok">OK</string>
+    <string name="stop">stop</string>
+    <string name="running">running...</string>
+    <string name="progress">Progress</string>
+    <string name="server_configuration">Server Configuration</string>
+    <string name="server_advance_configuration">Advance Server Configuration</string>
+    <string name="server_export">Export data</string>
+    <string name="modify_httpd_configuration">Modify lighttpd configuration</string>
+    <string name="modify_httpd_port">Change Server Port</string>
+    <string name="modify_httpd_port_desc">Avoid conflict with other APP</string>
+    <string name="modify_php_configuration">Modify php configuration</string>
+    <string name="reset_factory_configuration">Reset all configuration</string>
+    <string name="reset_factory_configuration_desc">If it can\' work after you changed any configuration</string>
+    <string name="click_to_open">Click to open</string>
+    <string name="click_to_enable">Click to enable</string>
+    <string name="show_http_err_log">Show http error log</string>
+    <string name="show_php_err_log">Show php error log</string>
+    <string name="clear_all_log">Clear all logs</string>
+    <string name="clear_all_log_desc">Only clear the server logs</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    <string name="clear_log">Clear Log</string>
+    <string name="notification_title">Click to show detail</string>
+    <string name="notification_text_share">Text Share</string>
+    <string name="notification_content">open %s\n on PC in same LAN\ninitial username: admin\npassword: 123456</string>
+    <string name="storage_internal">Internal Storage</string>
+    <string name="grant_storage_permission">grant storage permission to manage Local Files.</string>
+    <string name="grant_all_files_permission"><html><body>Since Android 11, Google requests APPs to request user permission for managing all files on the device. Details <a href="https://developer.android.com/training/data-storage/manage-all-files" target="_blank">here</a>.
+        \n\nCarryCloud needs this permission too. After pressing &quot;Grant&quot;here, please select <b>Allow access to manage all files</b> option on the next screen.
+        \n\n<font color='#ff6347'><i>Canceling this dialog will couldn\'t manage files in Local.</i></font></body></html></string>
+    <string name="grant">Grant</string>
+    <string name="grantper">Grant permission</string>
+    <string name="go_grant">Grant</string>
+    <string name="just_cloud">Just Cloud</string>
+    <string name="grantfailed">Permission not granted</string>
+    <string name="grant_notity_permission">grant the notification permission to receive message from your PC in background.</string>
+    <string name="network_ready">Serving on %s</string>
+    <string name="network_not_ready">Not in LAN</string>
+    <string name="copied">copied in clipboard</string>
+
+    <string name="selectNum">selected(%1$d/%2$d）</string>
+    <string name="tips">Choose Directory</string>
+    <string name="create_new_folder">Create New Directory</string>
+    <string name="input_folder_name">Input Folder Name</string>
+    <string name="confirm">Confirm</string>
+    <string name="here">HERE</string>
+    <string name="navi_path">mypath</string>
+    <string name="bad_path">bad path</string>
+    <string name="cloud_export">Export Your Cloud Data</string>
+    <string name="progress_text">Working Progress %s%%</string>
+    <string name="run_in_bg">Run in background, check progress in notification bar</string>
+    <string name="cloud_export_desc">export all cloud data to /sdcard/export.zip</string>
+    <string name="cloud_export_completed">Success saved to %s</string>
+    <string name="cloud_import_completed">Success to import cloud data</string>
+    <string name="cloud_import">Import Your Cloud Data</string>
+    <string name="cloud_import_desc">import cloud data from a zip</string>
+    <string name="file_selector">File Selector</string>
+    <string name="file_selector_desc">Do You Want Select %s</string>
+    <string name="go_back">Go Back</string>
+    <string name="prepare_cloud_env_need">Need to prepare the cloud environment</string>
+    <string name="prepare_cloud_env">Prepare the cloud environment</string>
+    <string name="prepare_cloud_env_begin">Begin to prepare Cloud Environment</string>
+    <string name="prepare_cloud_env_progress">Cloud Environment preparing: %s%%</string>
+    <string name="prepare_cloud_env_done">Cloud Environment Ready, you can power it on</string>
+    <string name="error_desc">Something error, please reset all configuration in advance settings </string>
+
+    <string name="phone_visible">Phone Visible</string>
+    <string name="phone_visibled">Ready, please access in Cloud UI</string>
+    <string name="phone_visible_desc">Manage Phone\'s file in cloud UI Ready.</string>
+
+    <string name="remote_access">Access me over Internet.</string>
+    <string name="remote_access_desc">Contact the author to obtain a private domain name.</string>
+
+    <!-- editor -->
+    <string name="error_file_not_found">Error: File Not Found</string>
+    <string name="error_io">I/O Error</string>
+    <string name="error_file_too_large">Error: File Too Large</string>
+    <string name="root_failure">Root Access not granted</string>
+    <string name="error">Error</string>
+    <string name="done">Done</string>
+    <string name="loading">Preparing Cloud Environment&#8230;</string>
+    <string name="file_empty">File is empty</string>
+    <string name="file_read_only">The file opened is a read-only.</string>
+    <string name="got_it">Got it!</string>
+    <string name="unsaved_changes">Unsaved Changes</string>
+    <string name="unsaved_changes_description">You have unsaved changes, do you want to save them before exiting?</string>
+    <string name="saving">Saving</string>
+    <string name="file_too_long">The file is too long and cannot be edited, however you can read the first %d characters</string>
+    <string name="save">Save</string>
+    <string name="advance_settings">Advance Settings</string>
+    <string name="recent">Recent files</string>
+    <string name="edit">Edit</string>
+    <string name="find">Find in page</string>
+    <string name="details">Details</string>
+    <string name="open_as">Open As</string>
+    <string name="open_with">Open with</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="monofont">Monospace Font</string>
+    <string name="root_path">Storage</string>
+
+    <!-- ftp -->
+    <string name="ftp_error_AVBL.notimplemented" translatable="false">Command not implemented for AndroidFileSystem.</string>
+    <string name="ftp_error_AVBL.isafile" translatable="false">Is a File.</string>
+    <string name="ftp_error_AVBL.missing" translatable="false">Path not found.</string>
+    <string name="ftp_error_AVBL.accessdenied" translatable="false">Access denied.</string>
+    <string name="ftp_command_FEAT" translatable="false">Extensions supported\n SIZE\n MDTM\n REST STREAM\n LANG en;zh-tw;ja;is\n MLST Size;Modify;Type;Perm\n AUTH SSL\n AUTH TLS\n MODE Z\n UTF8\n TVFS\n MD5\n MMD5\n MFMT\n AVBL\nEnd</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="about_detail">This software supports running PHP services on Android phones, comes with the open-source version of KodBox, and can directly manage the phone files outside of cloud storage. Cloud storage services can also be replaced with NextCloud, etc. It is not easy for personal development. Thanks for your support.</string>
+    <string name="coming_soon">Coming soon</string>
+</resources>

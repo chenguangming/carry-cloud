@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#212832</color>
+    <color name="colorPrimaryDark">#212832</color>
+    <color name="colorAccent">#212832</color>
+    <color name="icon_bg_color">#1296db</color>
+    <color name="md_color_title">@color/qmui_config_color_blue</color>
+    <color name="md_color_content">@color/qmui_config_color_75_white</color>
+    <color name="md_color_button_text">@color/qmui_config_color_75_white</color>
+    <color name="pageBgColor">#212832</color>
+    <color name="editorTextColor">@color/qmui_config_color_white</color>
+    <color name="editorTextColor2">@color/qmui_config_color_75_white</color>
+    <color name="editorBgColor">#212832</color>
+    <color name="selfBubbleBgColor">@color/qmui_config_color_gray_1</color>
+    <color name="peerBubbleBgColor">@color/qmui_config_color_75_white</color>
+    <color name="navibar_checked_color">#FFFFFF</color>
+    <color name="topbar_title_color">#FFFFFF</color>
+    <color name="app_color_description">#FFFFFF</color>
+    <color name="bar_divider">#D4D6D8</color>
+    <color name="tab_panel_bg">#ffffff</color>
+    <color name="tab_panel_divider">@color/bar_divider</color>
+    <color name="search_text_highlight">#FF9632</color>
+</resources>

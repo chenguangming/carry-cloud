@@ -1,0 +1,28 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlinVersion = "1.12.0"
+        androidxVersion = "2.7.0"
+        materialVersion = "1.11.0"
+        appcompatVersion = "1.6.1"
+        navigationVersion = "2.7.6"
+        workVersion = "2.9.0"
+        constraintVersion = "2.1.4"
+        preferenceVersion = "1.2.1"
+        cardviewVersion = "1.0.0"
+        qmuiVersion = "2.0.1"
+        materialDialogsVersion = "3.3.0"
+        media2_version = "1.2.1"
+        ftpserverVersion = "1.2.0"
+        logbackAndroidVersion = "2.0.0"
+        slf4jVersion = "1.7.36"
+        buglyVersion = "4.1.9.2"
+        compileSdk = 34
+        miniSdk = 28
+    }
+}
+plugins {
+    id 'com.android.application' version '8.2.2' apply false
+    id 'com.android.library' version '8.2.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+}

@@ -1,0 +1,78 @@
+<resources>
+    <!-- skin attr define-->
+    <attr name="app_primary_color" format="color" /> <!-- topbar -->
+    <attr name="app_content_bg_color" format="color" /> <!-- content-->
+    <attr name="app_skin_common_background" format="color|reference" />
+    <attr name="app_skin_common_background_1" format="color|reference" />
+    <attr name="app_skin_common_img_tint_color" format="color|reference" />
+    <attr name="app_skin_home_text_color" format="color|reference" />
+    <attr name="app_skin_common_title_text_color" format="color|reference" />
+    <attr name="app_skin_common_desc_text_color" format="color|reference" />
+    <attr name="app_skin_btn_test_bg" format="color|reference" />
+    <attr name="app_skin_btn_test_border" format="color|reference" />
+    <attr name="app_skin_btn_test_bg_single" format="color|reference" />
+    <attr name="app_skin_btn_test_border_single" format="color|reference" />
+    <attr name="app_skin_progress_bar_bg_color" format="color|reference" />
+    <attr name="app_skin_progress_bar_progress_color" format="color|reference" />
+    <attr name="app_skin_progress_bar_text_color" format="color|reference" />
+    <attr name="app_skin_span_normal_text_color" format="color" />
+    <attr name="app_skin_span_pressed_text_color" format="color" />
+    <attr name="app_skin_span_normal_bg_color" format="color" />
+    <attr name="app_skin_span_pressed_bg_color" format="color" />
+    <attr name="qmui_config_color_background" format="color" />
+    <attr name="app_skin_alpha_test" format="float" />
+
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+        <!-- 配置Android提供的theme -->
+        <item name="android:textAppearanceListItemSmall">@style/QDTextAppearanceListItemSmall</item>
+        <item name="android:textAppearanceListItem">@style/QDtextAppearanceListItem</item>
+        <item name="android:listPreferredItemHeight">?attr/qmui_list_item_height_higher</item>
+        <item name="android:listPreferredItemHeightSmall">?attr/qmui_list_item_height</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 配置afollestad materialdialogs -->
+        <item name="md_color_title">@color/md_color_title</item>
+        <item name="md_color_content">@color/md_color_content</item>
+        <item name="md_color_button_text">@color/md_color_button_text</item>
+
+        <!-- 配置qmui提供的theme -->
+        <item name="qmui_config_color_background">@color/colorPrimary</item>
+        <item name="qmui_skin_support_topbar_bg">@color/colorPrimary</item>
+        <item name="qmui_skin_support_topbar_separator_color">?attr/qmui_skin_support_color_separator</item>
+        <item name="qmui_skin_support_topbar_title_color">@color/qmui_config_color_white</item>
+        <item name="qmui_skin_support_topbar_subtitle_color">@color/qmui_config_color_white</item>
+        <item name="qmui_skin_support_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>
+        <item name="qmui_skin_support_topbar_image_tint_color">@color/qmui_config_color_white</item>
+        <item name="QMUITopBarStyle">@style/QDTopBar</item>
+    </style>
+
+    <!-- dark skin -->
+    <style name="app_skin_dark" parent="AppTheme">
+        <!--QMUI列表主题式样-->
+        <item name="qmui_skin_support_common_list_title_color">@color/qmui_config_color_white</item>
+        <item name="qmui_skin_support_common_list_detail_color">@color/qmui_config_color_50_white</item>
+        <item name="qmui_skin_support_common_list_icon_tint_color">@color/qmui_config_color_white</item>
+        <item name="qmui_skin_support_common_list_red_point_tint_color">?attr/qmui_skin_support_tab_sign_count_view_bg_color</item>
+        <item name="qmui_skin_support_common_list_new_drawable">@drawable/qmui_icon_tip_new</item>
+        <item name="qmui_skin_support_common_list_chevron_color">@color/qmui_config_color_50_white</item>
+        <item name="qmui_skin_support_s_list_item_bg_1">@drawable/s_list_item_bg_dark_1</item>
+        <item name="qmui_skin_support_s_list_item_bg_2">@drawable/s_list_item_bg_dark_2</item>
+        <item name="app_skin_common_title_text_color">@color/qmui_config_color_75_white</item>
+    </style>
+
+    <!-- white skin -->
+    <style name="app_skin_white" parent="AppTheme">
+        <!--QMUI列表主题式样-->
+        <item name="qmui_skin_support_common_list_title_color">@color/qmui_config_color_pure_black</item>
+        <item name="qmui_skin_support_common_list_detail_color">@color/qmui_config_color_50_pure_black</item>
+        <item name="qmui_skin_support_common_list_icon_tint_color">@color/qmui_config_color_pure_black</item>
+        <item name="qmui_skin_support_slider_bar_bg_color">@color/qmui_config_color_25_pure_black</item>
+        <item name="qmui_skin_support_slider_bar_progress_color">@color/qmui_config_color_pure_black</item>
+        <item name="qmui_skin_support_pull_refresh_view_color">@color/qmui_config_color_pure_black</item>
+        <item name="app_skin_common_img_tint_color">@color/qmui_config_color_pure_black</item>
+        <item name="app_skin_common_desc_text_color">@color/qmui_config_color_75_pure_black</item>
+    </style>
+</resources>
