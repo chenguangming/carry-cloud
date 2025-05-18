@@ -2,8 +2,10 @@ package com.photons.carrycloud.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +22,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
+import com.photons.carrycloud.Constants.GITHUB_URL
 import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.GLOBAL_IPV6
 import com.photons.carrycloud.Constants.HELP_URL
@@ -227,17 +230,26 @@ class HomeFragment : Fragment() {
 
     private val onHelpClicked = View.OnClickListener {
         val intent = Intent(activity, WebViewActivity::class.java)
-        intent.putExtra("html", HELP_URL)
+        intent.putExtra("html", GITHUB_URL) // todo  gitee.io已关闭，转github
         intent.putExtra("title", getString(R.string.help))
         startActivity(intent)
     }
 
     private val onAboutClicked = View.OnClickListener {
         MaterialDialog(requireActivity()).show {
-            title(R.string.about)
-            message(R.string.about_detail)
-            positiveButton(R.string.ok) { dialog ->
+            title(R.string.about).
+            message(R.string.about_detail) {
+                html { link ->
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+                }
+                lineSpacing(1.4f)
+            }
+            negativeButton(R.string.no_thanks) { dialog ->
                 dialog.dismiss()
+            }
+            positiveButton(R.string.star) { dialog ->
+                dialog.dismiss()
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.GITHUB_URL)))
             }
         }
     }

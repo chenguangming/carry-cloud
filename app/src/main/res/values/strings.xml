@@ -114,6 +114,8 @@
     <string name="open_with">Open with</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="star">Star</string>
+    <string name="no_thanks">No Thanks</string>
     <string name="monofont">Monospace Font</string>
     <string name="root_path">Storage</string>
     <string name="support_ipv6">IPv6 supported.\n%s</string>
@@ -126,6 +128,12 @@
     <string name="ftp_command_FEAT" translatable="false">Extensions supported\n SIZE\n MDTM\n REST STREAM\n LANG en;zh-tw;ja;is\n MLST Size;Modify;Type;Perm\n AUTH SSL\n AUTH TLS\n MODE Z\n UTF8\n TVFS\n MD5\n MMD5\n MFMT\n AVBL\nEnd</string>
 
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="about_detail">This software supports running PHP services on Android phones, comes with the open-source version of KodBox, and can directly manage the phone files outside of cloud storage. Cloud storage services can also be replaced with NextCloud, etc. It is not easy for personal development. Thanks for your support.</string>
+    <string name="about_detail"><![CDATA[
+        <b>CarryCloud</b> supports running PHP services on Android phones, comes with the open-source version of KodBox,
+        and can directly manage the phone files outside of cloud storage. Cloud storage services can also be replaced with NextCloud, etc.
+        It is not easy for personal development. Thanks for your support.\n
+        <a href="https://github.com/chenguangming/carry-cloud">Github</a>.<br/><br/>
+        <i><font color="#0099CC">Thanks for using CarryCloud!</font></i>
+    ]]></string>
     <string name="coming_soon">Coming soon</string>
 </resources>

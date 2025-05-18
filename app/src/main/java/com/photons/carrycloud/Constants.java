@@ -20,4 +20,5 @@ public class Constants {
     public static final String PENDING_INTENT_PATH_NOTIFY = "notify";
     public static final String BUGLY_APPID = "c0652cdc57";
     public static final String HELP_URL = "https://lightings.gitee.io/";
+    public static final String GITHUB_URL = "https://github.com/chenguangming/carry-cloud";
 }
