@@ -66,7 +66,7 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
         Logger.debug("onCreate")
 
         try {
-            startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIP))
+            startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIPv4))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -87,7 +87,7 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
                 Logger.debug("got notify permission $it")
                 if (it) {
                     registerNotificationChannel(notifyMgr)
-                    startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIP))
+                    startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIPv4))
                 }
             }
 

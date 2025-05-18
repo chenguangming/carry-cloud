@@ -3,16 +3,15 @@ package com.photons.carrycloud.utils
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.LinkAddress
 import android.net.LinkProperties
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import android.net.wifi.WifiManager
 import com.photons.carrycloud.App
 import com.photons.carrycloud.Constants
 import org.slf4j.LoggerFactory
 import java.net.Inet4Address
+import java.net.Inet6Address
 import java.net.InetAddress
 import java.net.ServerSocket
 import java.util.concurrent.ConcurrentHashMap
@@ -21,14 +20,19 @@ object NetworkUtils {
     private val Logger = LoggerFactory.getLogger("NetworkUtils")
     private val networkMap = ConcurrentHashMap<Network, String>()
     private val addrReg = Regex("[.:]")
-    var localIP = Constants.GLOBAL_IP
+    var localIPv4 = Constants.GLOBAL_IPV4
+    var localIPv6 = ArrayList<String>()
 
     fun isReady(): Boolean {
-        return Constants.GLOBAL_IP != localIP
+        return Constants.GLOBAL_IPV4 != localIPv4
     }
 
     fun isIPv4(address: InetAddress): Boolean {
         return (address is Inet4Address) || (address.hostAddress?.contains(".") == true)
+    }
+
+    fun isIPv6(address: InetAddress): Boolean {
+        return (address is Inet6Address) && !address.isLinkLocalAddress
     }
 
     fun listenNetwork(context: Context) {
@@ -45,10 +49,11 @@ object NetworkUtils {
                 Logger.debug("onLost $network left ${networkMap.size}")
 
                 if (networkMap.isEmpty()) {
-                    onIpChanged(Constants.GLOBAL_IP)
+                    onIpV4Changed(Constants.GLOBAL_IPV4)
+                    onIpV6Changed(Constants.GLOBAL_IPV6)
                 } else {
                     networkMap.forEach {
-                        onIpChanged(it.value)
+                        onIpV4Changed(it.value)
                     }
                 }
             }
@@ -59,12 +64,22 @@ object NetworkUtils {
 
                 linkProperties.linkAddresses.forEach { link ->
                     link.address.apply {
-                        if (!isLoopbackAddress && isIPv4(this)) {
-                            Logger.debug("add: ${formatAddress(this)} ")
+                        if (isLoopbackAddress) {
+                            return@apply
+                        }
+
+                        if (isIPv4(this)) {
+                            Logger.debug("add ipv4: ${formatAddress(this)} ")
 
                             hostAddress?.let { ipv4 ->
                                 networkMap[network] = ipv4
-                                onIpChanged(ipv4)
+                                onIpV4Changed(ipv4)
+                            }
+                        } else if (isIPv6(this)) {
+                            Logger.debug("add ipv6: ${formatAddressV6(this)} ")
+
+                            hostAddress?.let { ipv6 ->
+                                onIpV6Changed(ipv6)
                             }
                         }
                     }
@@ -73,14 +88,29 @@ object NetworkUtils {
         })
     }
 
-    fun onIpChanged(ipv4: String) {
-        if (localIP != ipv4) {
-            localIP = ipv4
+    fun onIpV4Changed(ipv4: String) {
+        if (localIPv4 != ipv4) {
+            localIPv4 = ipv4
             App.instance.onNetworkChanged()
         }
     }
 
+    fun onIpV6Changed(ipv6: String) {
+        if (ipv6 == Constants.GLOBAL_IPV6) {
+            localIPv6.clear()
+        } else if (!localIPv6.contains(ipv6)) {
+            localIPv6.add(ipv6)
+        }
+        App.instance.onIpv6Changed(ipv6)
+    }
+
     fun formatAddress(address: InetAddress): String? {
+        return address.hostAddress?.let {
+            return it.replace(addrReg, "-")
+        }
+    }
+
+    fun formatAddressV6(address: InetAddress): String? {
         return address.hostAddress?.let {
             return it.replace(addrReg, "-")
         }

@@ -20,7 +20,8 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
-import com.photons.carrycloud.Constants.GLOBAL_IP
+import com.photons.carrycloud.Constants.GLOBAL_IPV4
+import com.photons.carrycloud.Constants.GLOBAL_IPV6
 import com.photons.carrycloud.Constants.HELP_URL
 import com.photons.carrycloud.databinding.FragmentHomeBinding
 import com.photons.carrycloud.service.HttpServerState
@@ -277,10 +278,22 @@ class HomeFragment : Fragment() {
         LiveEventBus
             .get(Constants.NETWORK_STATE_CHANGED_KEY, String::class.java)
             .observeSticky(this) {
-                if (it == GLOBAL_IP) {
+                if (it == GLOBAL_IPV4) {
                     serverSwitch.text = getString(R.string.wifi_disconnected)
                 } else {
                     serverSwitch.text = App.instance.getServerPath()
+                }
+            }
+
+
+        LiveEventBus
+            .get(Constants.NETWORK_V6_STATE_CHANGED_KEY, String::class.java)
+            .observeSticky(this) {
+                if (it == GLOBAL_IPV6) {
+                    binding.ipv6Addr.visibility = View.GONE
+                } else {
+                    binding.ipv6Addr.text = getString(R.string.support_ipv6, App.instance.getServerPathV6())
+                    binding.ipv6Addr.visibility = View.VISIBLE
                 }
             }
 

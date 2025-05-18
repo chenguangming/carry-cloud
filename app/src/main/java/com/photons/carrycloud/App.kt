@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import com.photons.bus.LiveEventBus
-import com.photons.carrycloud.Constants.GLOBAL_IP
+import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.WS_PORT
 import com.photons.carrycloud.service.WebService
 import com.photons.carrycloud.ui.notifications.MyWebSocketServer
@@ -37,7 +37,17 @@ class App : Application() {
     }
 
     fun getServerPath(): String {
-        return "http://${NetworkUtils.localIP}:${getServerPort()}"
+        return "http://${NetworkUtils.localIPv4}:${getServerPort()}"
+    }
+
+    fun getServerPathV6(): String {
+        val port = getServerPort()
+        val sb = StringBuilder()
+        NetworkUtils.localIPv6.forEach {
+            sb.append("http://[${it}]:$port\n")
+        }
+
+        return sb.toString()
     }
 
     fun getServerPort(): Int {
@@ -58,7 +68,7 @@ class App : Application() {
     }
 
     fun startWsServer() {
-        val myHost = InetSocketAddress(GLOBAL_IP, WS_PORT)
+        val myHost = InetSocketAddress(GLOBAL_IPV4, WS_PORT)
         if (wsServer == null) {
             wsServer = MyWebSocketServer(myHost)
             wsServer?.isReuseAddr = true // 避免java.net.BindException:Address already in use异常
@@ -76,17 +86,22 @@ class App : Application() {
 
     fun onNetworkChanged() {
         if (NetworkUtils.isReady()) {
-            instance.toast(getString(R.string.network_ready, NetworkUtils.localIP))
+            instance.toast(getString(R.string.network_ready, NetworkUtils.localIPv4))
 
             instance.startServer(true)
             instance.startWsServer()
-            LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIP)
+            LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
         } else {
             instance.toast(getString(R.string.network_not_ready))
 
             instance.startServer(false)
         }
-        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIP)
+        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
+    }
+
+    fun onIpv6Changed(ipv6: String) {
+        // todo start ws server on ipv6 for text share
+        LiveEventBus.get<String>(Constants.NETWORK_V6_STATE_CHANGED_KEY).post(ipv6)
     }
 
     override fun onCreate() {
@@ -119,7 +134,7 @@ class App : Application() {
         SPUtils.putInt(KEY_SERVER_PORT, port)
 
         startServer(false)
-        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIP)
+        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
 
         mainHandler.postDelayed({
             startServer(true)

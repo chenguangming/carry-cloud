@@ -3,10 +3,12 @@ package com.photons.carrycloud;
 public class Constants {
     public static final int HTTP_PORT = 8818;
     public static final int WS_PORT = 45615;
-    public static final String GLOBAL_IP = "0.0.0.0";
+    public static final String GLOBAL_IPV4 = "0.0.0.0";
+    public static final String GLOBAL_IPV6 = "::";
 
     public static final String WORKER_PROGRESS_KEY = "percent";
     public static final String NETWORK_STATE_CHANGED_KEY = "network.changed";
+    public static final String NETWORK_V6_STATE_CHANGED_KEY = "network.changed.v6";
     public static final String LANG_CHANGED = "lang.changed";
     public static final String STORAGE_PERMISSION_CHANGED_KEY = "storage.permission.changed";
     public static final String NOTIFY_PERMISSION_CHANGED_KEY = "notify.permission.changed";

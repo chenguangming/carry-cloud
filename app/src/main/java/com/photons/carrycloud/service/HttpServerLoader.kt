@@ -51,7 +51,7 @@ class HttpServerLoader(private val context: Context, private val listener: Loade
 
         if (sysLang.equals("zh")){
             Logger.debug("zh: ${locale.toLanguageTag()}")
-            sysLang = if (locale.toLanguageTag() == "zh-Hans-CN") {
+            sysLang = if (locale.toLanguageTag() == "zh-Hans-CN" || locale.toLanguageTag() == "zh-CN") {
                 "zh-CN"
             } else {
                 "zh-TW"
