@@ -25,7 +25,7 @@ class HttpServerLoader(private val context: Context, private val listener: Loade
     private var dataRoot: String = ""
 
     private var httpProcess: SubProcess? = null
-    private var frpcProcess: SubProcess? = null
+    private var ddnsProcess: SubProcess? = null
 
     interface LoaderListener {
         fun onServerStarted()
@@ -76,7 +76,6 @@ class HttpServerLoader(private val context: Context, private val listener: Loade
         ensureDirectoryExists("$dataRoot/conf")
         FileUtils.buildServerConfFile(context, "conf/lighttpd.conf", "$dataRoot/conf/lighttpd.conf")
         FileUtils.buildServerConfFile(context, "conf/php.ini", "$dataRoot/conf/php.ini")
-        FileUtils.buildServerConfFile(context, "conf/frpc.toml", "$dataRoot/conf/frpc.toml")
 
         if (File("$dataRoot/loaded").exists()) {
             followSystemLanguage("$dataRoot/www/lang")
@@ -152,7 +151,7 @@ class HttpServerLoader(private val context: Context, private val listener: Loade
             httpProcess?.run()
         }
 
-        startFRPC()
+        startDDNS()
     }
 
     fun stop() {
@@ -163,36 +162,36 @@ class HttpServerLoader(private val context: Context, private val listener: Loade
 
         httpProcess = null
 
-        stopFRPC()
+        stopDDNS()
     }
 
-    fun startFRPC() {
-        if (frpcProcess != null) {
+    private fun startDDNS() {
+        if (ddnsProcess != null) {
             return
         }
 
-        frpcProcess = SubProcess(
-            "libfrpc",
-            "$binRoot/libfrpc.so -c=$dataRoot/conf/frpc.toml",
+        ddnsProcess = SubProcess(
+            "ddns-go",
+            "$binRoot/libddns-go.so -c $dataRoot/conf/ddns_go_config.yaml",
             arrayOf("LD_LIBRARY_PATH=$binRoot"),
             object : SubProcess.Listener {
                 override fun onStarted() {
-                    Logger.debug("frpc onStarted")
+                    Logger.debug("ddns-go onStarted")
                 }
 
                 override fun onStopped(exitValue: Int) {
-                    Logger.debug("frpc exitValue $exitValue")
+                    Logger.debug("ddns-go exitValue $exitValue")
                 }
             })
-        frpcProcess?.run()
+        ddnsProcess?.run()
     }
 
-    fun stopFRPC() {
-        frpcProcess?.kill()
+    private fun stopDDNS() {
+        ddnsProcess?.kill()
 
         // 保障子进程退出
-        Shell.exec("killall -9 libfrpc.so", null)
+        Shell.exec("killall -9 libddns-go.so", null)
 
-        frpcProcess = null
+        ddnsProcess = null
     }
 }

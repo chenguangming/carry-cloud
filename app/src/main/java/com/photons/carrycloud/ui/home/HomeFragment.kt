@@ -22,6 +22,7 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
+import com.photons.carrycloud.Constants.DDNS_ENTRY_URL
 import com.photons.carrycloud.Constants.GITHUB_URL
 import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.GLOBAL_IPV6
@@ -139,6 +140,10 @@ class HomeFragment : Fragment() {
 
     private val onAccessOverInternetClicked = View.OnClickListener {
         App.instance.toast(getString(R.string.coming_soon))
+        val intent = Intent(activity, WebViewActivity::class.java)
+        intent.putExtra("html", DDNS_ENTRY_URL)
+        intent.putExtra("title", getString(R.string.remote_access_desc))
+        startActivity(intent)
     }
 
     private val onPhoneVisibleClicked = View.OnClickListener {

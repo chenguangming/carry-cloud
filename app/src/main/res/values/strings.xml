@@ -86,8 +86,8 @@
     <string name="phone_visibled">Ready, please access in Cloud UI</string>
     <string name="phone_visible_desc">Manage Phone\'s file in cloud UI Ready.</string>
 
-    <string name="remote_access">Access me over Internet.</string>
-    <string name="remote_access_desc">Contact the author to obtain a private domain name.</string>
+    <string name="remote_access">Access me over Internet</string>
+    <string name="remote_access_desc">Config your own DDNS</string>
 
     <!-- editor -->
     <string name="error_file_not_found">Error: File Not Found</string>

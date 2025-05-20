@@ -75,8 +75,8 @@
     <string name="phone_visible">云盘管理手机文件</string>
     <string name="phone_visibled">已就绪，请在云盘中打开</string>
     <string name="phone_visible_desc">已就绪，可在云盘环境管理手机本地文件</string>
-    <string name="remote_access">通过互联网访问云盘.</string>
-    <string name="remote_access_desc">联系作者获得专用域名及授权文件.</string>
+    <string name="remote_access">通过互联网访问云盘</string>
+    <string name="remote_access_desc">请配置您的DDNS</string>
     <string name="error_file_not_found">错误：文件没找到</string>
     <string name="error_io">IO错误</string>
     <string name="error_file_too_large">文件过大</string>
