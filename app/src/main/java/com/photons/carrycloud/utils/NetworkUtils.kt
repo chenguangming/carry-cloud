@@ -40,6 +40,7 @@ object NetworkUtils {
 
         val req = NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+            .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
             .addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET).build()
 
         connManager.registerNetworkCallback(req, object : ConnectivityManager.NetworkCallback() {
@@ -69,7 +70,7 @@ object NetworkUtils {
                         }
 
                         if (isIPv4(this)) {
-                            Logger.debug("add ipv4: ${formatAddress(this)} ")
+                            Logger.debug("add ipv4: ${formatAddress(this)}")
 
                             hostAddress?.let { ipv4 ->
                                 networkMap[network] = ipv4
