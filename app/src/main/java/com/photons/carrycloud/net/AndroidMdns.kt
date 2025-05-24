@@ -10,6 +10,7 @@ import java.net.InetAddress
 
 object AndroidMdns: BaseMdns(), NsdManager.DiscoveryListener, NsdManager.ResolveListener {
     private val TAG = "AndroidMdns"
+    private val MDNS_SERVICE_TYPE = "_http._tcp"
     private val nsdManager = App.instance.getSystemService(Context.NSD_SERVICE) as NsdManager
 
     override fun start(address: InetAddress) {

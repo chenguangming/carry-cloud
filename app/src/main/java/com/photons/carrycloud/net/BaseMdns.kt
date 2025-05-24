@@ -6,8 +6,7 @@ import com.photons.carrycloud.Constants
 import java.net.InetAddress
 
 abstract class BaseMdns {
-    val MDNS_SERVICE_TYPE: String = "_http._tcp.local."
-    val MDNS_SERVICE_NAME: String = "cc2"
+    val MDNS_SERVICE_NAME: String = "cc"
     val MDNS_SERVICE_DESC: String = "carrycloud"
 
     abstract fun start(address: InetAddress)

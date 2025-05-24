@@ -10,7 +10,6 @@ import android.net.NetworkRequest
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.App
 import com.photons.carrycloud.Constants
-import com.photons.carrycloud.net.AndroidMdns
 import com.photons.carrycloud.net.JavaMdns
 import org.slf4j.LoggerFactory
 import java.net.Inet4Address
@@ -25,8 +24,7 @@ object NetworkUtils {
     private val addrReg = Regex("[.:]")
     var localIPv4 = Constants.GLOBAL_IPV4
     var localIPv6 = ArrayList<String>()
-    var useAndroidMDNS = true
-    var mdns = if (useAndroidMDNS) AndroidMdns else JavaMdns
+    var mdns = JavaMdns// AndroidMdns 注册后，无论怎么设置serviceName，实际域名都是android.local，所以暂时弃用
 
     fun isReady(): Boolean {
         return Constants.GLOBAL_IPV4 != localIPv4

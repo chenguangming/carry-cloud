@@ -15,6 +15,8 @@ import javax.jmdns.ServiceListener
 object JavaMdns: ServiceListener, BaseMdns() {
     private val TAG = "JavaMdns"
     private var jmdns: JmDNS? = null
+    // JavaMdns的service type必须要加local.才能工作，而AndroidMdns加了会注册失败
+    private val MDNS_SERVICE_TYPE = "_http._tcp.local."
 
     override fun start(address: InetAddress) {
         Log.d(TAG, "JmDNS start: $address")
