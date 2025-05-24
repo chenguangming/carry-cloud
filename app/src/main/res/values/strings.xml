@@ -136,4 +136,5 @@
         <i><font color="#0099CC">Thanks for using CarryCloud!</font></i>
     ]]></string>
     <string name="coming_soon">Coming soon</string>
+    <string name="show_all_netcards">Show all networks</string>
 </resources>

@@ -67,6 +67,9 @@
         <activity
             android:name=".ui.advance.AdvanceActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.ifconfig.IfconfigActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="BUGLY_APP_CHANNEL"

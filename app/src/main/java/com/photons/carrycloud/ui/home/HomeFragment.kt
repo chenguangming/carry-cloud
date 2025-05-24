@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +31,7 @@ import com.photons.carrycloud.service.HttpServerState
 import com.photons.carrycloud.service.WebService
 import com.photons.carrycloud.task.ZipTask
 import com.photons.carrycloud.ui.advance.AdvanceActivity
+import com.photons.carrycloud.ui.ifconfig.IfconfigActivity
 import com.photons.carrycloud.ui.fileselector.FileSelectOptions
 import com.photons.carrycloud.ui.fileselector.FileSelectorActivity
 import com.photons.carrycloud.ui.webview.WebViewActivity
@@ -231,11 +231,8 @@ class HomeFragment : Fragment() {
         startActivity(Intent(activity, AdvanceActivity::class.java))
     }
 
-    private val onHelpClicked = View.OnClickListener {
-        val intent = Intent(activity, WebViewActivity::class.java)
-        intent.putExtra("html", GITHUB_URL) // todo  gitee.io已关闭，转github
-        intent.putExtra("title", getString(R.string.help))
-        startActivity(intent)
+    private val onShowAllNetsClicked = View.OnClickListener {
+        startActivity(Intent(activity, IfconfigActivity::class.java))
     }
 
     private val onAboutClicked = View.OnClickListener {
@@ -331,7 +328,7 @@ class HomeFragment : Fragment() {
         val serverExport = createItemView(R.string.cloud_export, R.string.cloud_export_desc)
         val serverImport = createItemView(R.string.cloud_import, R.string.cloud_import_desc)
         val advanceSettings = createItemView(R.string.advance_settings, R.string.click_to_open)
-        val help = createItemView(R.string.help, R.string.click_to_open)
+        val showAllNets = createItemView(R.string.show_all_netcards, R.string.click_to_open)
         val about = createItemView(getString(R.string.about), "v${BuildConfig.VERSION_NAME}", ACCESSORY_TYPE_NONE)
 
         val phoneVisible = if (PermissionUtils.hasStoragePermission(requireActivity())) {
@@ -350,7 +347,7 @@ class HomeFragment : Fragment() {
                 addItemView(serverExport, onServerExportClicked)
                 addItemView(serverImport, onServerImportClicked)
                 addItemView(advanceSettings, onAdvanceSettingsClicked)
-                addItemView(help, onHelpClicked)
+                addItemView(showAllNets, onShowAllNetsClicked)
                 addItemView(about, onAboutClicked)
             }
             .setMiddleSeparatorInset(QMUIDisplayHelper.dp2px(context, 8), 0)
