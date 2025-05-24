@@ -3,6 +3,7 @@ package com.photons.carrycloud.net
 import android.util.Log
 import com.photons.carrycloud.Constants.HTTP_PORT
 import java.io.IOException
+import java.net.Inet4Address
 import java.net.InetAddress
 import javax.jmdns.JmDNS
 import javax.jmdns.ServiceEvent
@@ -15,12 +16,11 @@ object JavaMdns: ServiceListener, BaseMdns() {
     private var jmdns: JmDNS? = null
     // JavaMdns的service type必须要加local.才能工作，而AndroidMdns加了会注册失败
     private val MDNS_SERVICE_TYPE = "_http._tcp.local."
-    private var myAddress: String? = null
 
-    override fun start(address: InetAddress) {
+    override fun start(address: String) {
         Log.d(TAG, "JmDNS start: $address")
         try {
-            if (address.hostAddress?.equals(myAddress) == true) {
+            if (address == myAddress) {
                 Log.d(TAG, "JmDNS already started with: $address")
                 return
             }
@@ -31,7 +31,7 @@ object JavaMdns: ServiceListener, BaseMdns() {
             }
 
             // 使用自定义主机名初始化 JmDNS
-            jmdns = JmDNS.create(address, MDNS_SERVICE_NAME) // 明确指定主机名
+            jmdns = JmDNS.create(InetAddress.getByName(address), MDNS_SERVICE_NAME) // 明确指定主机名
             Log.d(TAG, "JmDNS initialized with IP: $address")
 
             // 创建 ServiceInfo
@@ -42,7 +42,7 @@ object JavaMdns: ServiceListener, BaseMdns() {
                 MDNS_SERVICE_DESC
             )
 
-            myAddress = address.hostAddress
+            myAddress = address
 
             // 注册服务
             jmdns?.addServiceListener(MDNS_SERVICE_TYPE, this)
@@ -74,7 +74,7 @@ object JavaMdns: ServiceListener, BaseMdns() {
         Log.d(TAG, "Service resolved addr: " + NetManager.formatAddress(event.dns.inetAddress))
         if (event.dns.inetAddress.hostAddress?.equals(myAddress) == true) {
             Log.d(TAG, "Service resolved myself")
-            onDiscoveryMySelf(event.name)
+            onDiscoveryMySelf(myAddress!!, event.name)
         }
     }
 }

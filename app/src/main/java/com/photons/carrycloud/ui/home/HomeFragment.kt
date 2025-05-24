@@ -268,7 +268,7 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initGroupListView() {
-        val serverSwitch = binding.groupListView.createItemView(NetManager.getServerPath(null))
+        val serverSwitch = binding.groupListView.createItemView(NetManager.getServerPath(null, Constants.ACCESS_TYPE_IPV4))
         serverSwitch.detailText = getString(R.string.stopped)
         serverSwitch.orientation = QMUICommonListItemView.VERTICAL
         serverSwitch.accessoryType = ACCESSORY_TYPE_SWITCH

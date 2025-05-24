@@ -13,7 +13,7 @@ object AndroidMdns: BaseMdns(), NsdManager.DiscoveryListener, NsdManager.Resolve
     private val MDNS_SERVICE_TYPE = "_http._tcp"
     private val nsdManager = App.instance.getSystemService(Context.NSD_SERVICE) as NsdManager
 
-    override fun start(address: InetAddress) {
+    override fun start(address: String) {
         // 创建 NsdServiceInfo 对象
         val serviceInfo = NsdServiceInfo().apply {
             serviceName = MDNS_SERVICE_NAME
@@ -111,7 +111,7 @@ object AndroidMdns: BaseMdns(), NsdManager.DiscoveryListener, NsdManager.Resolve
     override fun onServiceResolved(serviceInfo: NsdServiceInfo) {
         Log.d(TAG, "Resolve Succeeded. $serviceInfo")
         if (serviceInfo.serviceName.contains(MDNS_SERVICE_NAME)) {
-            onDiscoveryMySelf(serviceInfo.serviceName)
+            onDiscoveryMySelf(myAddress!!, serviceInfo.serviceName)
         }
     }
 }
