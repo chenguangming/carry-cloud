@@ -20,19 +20,19 @@ object JavaMdns: ServiceListener, BaseMdns() {
         Log.d(TAG, "JmDNS start: $address")
         try {
             // 使用自定义主机名初始化 JmDNS
-            jmdns = JmDNS.create(address, MDNSS_SERVICE_NAME) // 明确指定主机名
+            jmdns = JmDNS.create(address, MDNS_SERVICE_NAME) // 明确指定主机名
             Log.d(TAG, "JmDNS initialized with IP: $address")
 
             // 创建 ServiceInfo
             val serviceInfo = ServiceInfo.create(
-                MDNSS_SERVICE_TYPE,
-                MDNSS_SERVICE_NAME,
+                MDNS_SERVICE_TYPE,
+                MDNS_SERVICE_NAME,
                 HTTP_PORT,
-                MDNSS_SERVICE_DESC
+                MDNS_SERVICE_DESC
             )
 
             // 注册服务
-            jmdns?.addServiceListener(MDNSS_SERVICE_TYPE, this)
+            jmdns?.addServiceListener(MDNS_SERVICE_TYPE, this)
             jmdns?.registerService(serviceInfo)
             Log.d(TAG, "Service registered: $serviceInfo")
         } catch (e: IOException) {

@@ -138,7 +138,6 @@ class HomeFragment : Fragment() {
     }
 
     private val onAccessOverInternetClicked = View.OnClickListener {
-        App.instance.toast(getString(R.string.coming_soon))
         val intent = Intent(activity, WebViewActivity::class.java)
         intent.putExtra("html", DDNS_ENTRY_URL)
         intent.putExtra("title", getString(R.string.remote_access_desc))

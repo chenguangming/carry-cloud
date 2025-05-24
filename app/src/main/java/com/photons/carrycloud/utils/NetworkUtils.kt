@@ -10,6 +10,7 @@ import android.net.NetworkRequest
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.App
 import com.photons.carrycloud.Constants
+import com.photons.carrycloud.net.AndroidMdns
 import com.photons.carrycloud.net.JavaMdns
 import org.slf4j.LoggerFactory
 import java.net.Inet4Address
@@ -24,7 +25,8 @@ object NetworkUtils {
     private val addrReg = Regex("[.:]")
     var localIPv4 = Constants.GLOBAL_IPV4
     var localIPv6 = ArrayList<String>()
-
+    var useAndroidMDNS = true
+    var mdns = if (useAndroidMDNS) AndroidMdns else JavaMdns
 
     fun isReady(): Boolean {
         return Constants.GLOBAL_IPV4 != localIPv4
@@ -55,6 +57,8 @@ object NetworkUtils {
                 if (networkMap.isEmpty()) {
                     onIpV4Changed(Constants.GLOBAL_IPV4)
                     onIpV6Changed(Constants.GLOBAL_IPV6)
+
+                    mdns.stop()
                 } else {
                     networkMap.forEach {
                         onIpV4Changed(it.value)
@@ -80,7 +84,7 @@ object NetworkUtils {
                                 onIpV4Changed(ipv4)
                             }
 
-                            JavaMdns.start(this)
+                            mdns.start(this)
                         } else if (isIPv6(this)) {
                             Logger.debug("add ipv6: ${formatAddressV6(this)} ")
 

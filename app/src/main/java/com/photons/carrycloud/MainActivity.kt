@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.net.nsd.NsdManager
+import android.net.nsd.NsdServiceInfo
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
@@ -35,6 +37,8 @@ import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import com.tencent.bugly.crashreport.CrashReport
 import org.slf4j.LoggerFactory
+import java.io.IOException
+import java.net.InetAddress
 import java.text.DecimalFormat
 import java.util.UUID
 
