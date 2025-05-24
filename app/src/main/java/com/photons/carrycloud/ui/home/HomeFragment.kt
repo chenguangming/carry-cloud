@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,9 +26,8 @@ import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
 import com.photons.carrycloud.Constants.DDNS_ENTRY_URL
 import com.photons.carrycloud.Constants.GITHUB_URL
-import com.photons.carrycloud.Constants.GLOBAL_IPV4
-import com.photons.carrycloud.Constants.GLOBAL_IPV6
 import com.photons.carrycloud.databinding.FragmentHomeBinding
+import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.service.HttpServerState
 import com.photons.carrycloud.service.WebService
 import com.photons.carrycloud.task.ZipTask
@@ -34,7 +35,6 @@ import com.photons.carrycloud.ui.advance.AdvanceActivity
 import com.photons.carrycloud.ui.fileselector.FileSelectOptions
 import com.photons.carrycloud.ui.fileselector.FileSelectorActivity
 import com.photons.carrycloud.ui.webview.WebViewActivity
-import com.photons.carrycloud.utils.NetworkUtils
 import com.photons.carrycloud.utils.PermissionUtils
 import com.photons.carrycloud.utils.ProgressCallback
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
@@ -271,18 +271,18 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initGroupListView() {
-        val serverSwitch = binding.groupListView.createItemView(App.instance.getServerPath())
+        val serverSwitch = binding.groupListView.createItemView(NetManager.getServerPath(null))
         serverSwitch.detailText = getString(R.string.stopped)
         serverSwitch.orientation = QMUICommonListItemView.VERTICAL
         serverSwitch.accessoryType = ACCESSORY_TYPE_SWITCH
         serverSwitch.switch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (NetworkUtils.isReady()) {
+                if (NetManager.isReady()) {
                     App.instance.startServer(true)
                 } else {
                     startActivity(Intent(android.provider.Settings.ACTION_WIFI_SETTINGS))
                     serverSwitch.switch.isChecked = false
-                    App.instance.toast(getString(R.string.wifi_disconnected))
+                    App.instance.toast(getString(R.string.no_network))
                 }
             } else {
                 App.instance.startServer(false)
@@ -292,20 +292,16 @@ class HomeFragment : Fragment() {
         serverSwitch.switch.isChecked = WebService.isHttpServerStart()
 
         LiveEventBus
-            .get(Constants.NETWORK_STATE_CHANGED_KEY, String::class.java)
-            .observeSticky(this) {
-                if (it == GLOBAL_IPV4) {
-                    serverSwitch.text = getString(R.string.wifi_disconnected)
-                } else {
-                    serverSwitch.text = App.instance.getServerPath()
-                }
-            }
-
-
-        LiveEventBus
             .get(Constants.NOTIFY_ACCESS_CHANGED_KEY, String::class.java)
             .observeSticky(this) {
-                binding.myAddr.text = App.instance.getAllAccessAddresses()
+                Logger.debug("NOTIFY_ACCESS_CHANGED $it")
+                binding.myAddr.text = NetManager.getAllAccessAddresses()
+                val addr = NetManager.getFirstAccessAddresses()
+                if (TextUtils.isEmpty(addr)) {
+                    serverSwitch.text = getString(R.string.no_network)
+                } else {
+                    serverSwitch.text = addr
+                }
             }
 
         LiveEventBus
@@ -323,7 +319,7 @@ class HomeFragment : Fragment() {
                 serverSwitch.switch.isChecked = it.isStarted
 
                 binding.usageText.text = if (it.isStarted) {
-                    getString(R.string.notification_content)
+                    getString(R.string.tip_content)
                 } else if (it.errNo != 0) {
                     getString(R.string.error_desc)
                 } else {

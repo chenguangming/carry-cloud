@@ -17,7 +17,7 @@ abstract class BaseMdns {
     }
 
     fun onDiscoveryMySelf(hostName: String) {
-        App.instance.accessAddresses[Constants.ACCESS_TYPE_MDNS] = getFullUrl(hostName)
+        NetManager.updateAccessAddress(Constants.ACCESS_TYPE_MDNS, getFullUrl(hostName))
 
         LiveEventBus
             .get(Constants.NOTIFY_ACCESS_CHANGED_KEY, String::class.java)

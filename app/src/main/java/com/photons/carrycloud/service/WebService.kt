@@ -17,8 +17,8 @@ import androidx.work.WorkManager
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
 import com.photons.carrycloud.Constants.WORKER_PROGRESS_KEY
+import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.task.ZipTask
-import com.photons.carrycloud.utils.NetworkUtils
 import com.photons.carrycloud.utils.ProgressCallback
 import org.slf4j.LoggerFactory
 import java.lang.ref.WeakReference
@@ -66,7 +66,7 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
         Logger.debug("onCreate")
 
         try {
-            startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIPv4))
+            startForeground(FG_NOTIFICATION_ID, buildNotification(NetManager.getFirstAccessAddresses()))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -75,10 +75,10 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
         prepareCloudRoot()
 
         LiveEventBus
-            .get(Constants.NETWORK_STATE_CHANGED_KEY, String::class.java)
+            .get(Constants.NOTIFY_ACCESS_CHANGED_KEY, String::class.java)
             .observeSticky(this) {
-                Logger.debug("update ip $it")
-                notifyMgr.notify(FG_NOTIFICATION_ID, buildNotification(it))
+                Logger.debug("update ${NetManager.getFirstAccessAddresses()}")
+                notifyMgr.notify(FG_NOTIFICATION_ID, buildNotification(NetManager.getFirstAccessAddresses()))
             }
 
         LiveEventBus
@@ -87,7 +87,7 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
                 Logger.debug("got notify permission $it")
                 if (it) {
                     registerNotificationChannel(notifyMgr)
-                    startForeground(FG_NOTIFICATION_ID, buildNotification(NetworkUtils.localIPv4))
+                    startForeground(FG_NOTIFICATION_ID, buildNotification(NetManager.getFirstAccessAddresses()))
                 }
             }
 
@@ -137,7 +137,7 @@ class WebService : LifecycleService(), HttpServerLoader.LoaderListener {
         nb.setContentIntent(PendingIntent.getActivity(this, 0, intent,
             FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE))
         nb.setContentTitle(getString(R.string.notification_title))
-        nb.setContentText(getString(R.string.notification_content, "http://${localIP}:${App.instance.getServerPort()}"))
+        nb.setContentText(getString(R.string.notification_content, NetManager.getFirstAccessAddresses()))
         nb.setSubText(getString(R.string.running))
         nb.setSilent(true)
         nb.setOngoing(true)

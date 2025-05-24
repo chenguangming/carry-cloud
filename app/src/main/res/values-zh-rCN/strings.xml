@@ -31,7 +31,9 @@
     <string name="about">关于</string>
     <string name="notification_title">点击查看详情</string>
     <string name="notification_text_share">文本分享</string>
-    <string name="notification_content">使用电脑浏览器访问您的云盘\n初始帐号密码：admin/123456</string>
+    <string name="tip_content">电脑浏览器访问您的云盘\n初始帐号密码：admin/123456</string>
+    <string name="ipv6_no_dns">只有IPv6，建议结合DDNS使用</string>
+    <string name="notification_content">电脑浏览器打开%s\n初始帐号密码：admin/123456</string>
     <string name="storage_internal">内部存储</string>
     <string name="grant_storage_permission">授予存储权限可以管理本地文件</string>
     <string name="grant_all_files_permission"><html><body>Android 11之后, 要求所有需要访问内部存储文件的应用都要申请权限.
@@ -45,7 +47,6 @@
     <string name="grantfailed">未允许</string>
     <string name="grant_notity_permission">授予通知权限，可在后台接收PC端消息</string>
     <string name="network_ready">本机地址 %s</string>
-    <string name="network_not_ready">无局域网连接</string>
     <string name="copied">已拷贝到剪切板</string>
     <string name="cancel">取消</string>
     <string name="ok">好的</string>
@@ -110,7 +111,7 @@
     <string name="input_folder_name">输入文件夹名称</string>
     <string name="warning">高能预警</string>
     <string name="modify_warning">除非你知道在自己做什么，否则不要修改任何配置</string>
-    <string name="wifi_disconnected">请先连接WiFi或者以太网</string>
+    <string name="no_network">请先连接网络</string>
     <string name="about_detail"><![CDATA[
         <b>CarryCloud</b> 支持将PHP服务运行在安卓手机，自带KodBox开源版本，并可直接管理云盘以外的手机文件，云盘服务也可替换为NextCloud等。个人撸码不易，感谢支持！\n
         <a href="https://github.com/chenguangming/carry-cloud">Github</a>.<br/><br/>

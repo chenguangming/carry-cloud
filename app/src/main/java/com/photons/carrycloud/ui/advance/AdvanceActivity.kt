@@ -13,9 +13,9 @@ import com.afollestad.materialdialogs.input.input
 import com.photons.carrycloud.App
 import com.photons.carrycloud.R
 import com.photons.carrycloud.databinding.ActivityAdvanceBinding
+import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.ui.editor.TextEditorActivity
 import com.photons.carrycloud.utils.FileUtils
-import com.photons.carrycloud.utils.NetworkUtils
 import com.qmuiteam.qmui.arch.QMUIActivity
 import com.qmuiteam.qmui.skin.QMUISkinManager
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
@@ -87,7 +87,7 @@ class AdvanceActivity : QMUIActivity() {
                         return@input
                     }
 
-                    if (!NetworkUtils.checkPortAvailable(port)) {
+                    if (!NetManager.checkPortAvailable(port)) {
                         App.instance.toast("$port busy")
                         return@input
                     } else {

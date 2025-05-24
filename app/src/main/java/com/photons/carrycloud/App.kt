@@ -5,14 +5,18 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.WS_PORT
+import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.service.WebService
+import com.photons.carrycloud.ui.home.HomeFragment
+import com.photons.carrycloud.ui.home.HomeFragment.Companion
 import com.photons.carrycloud.ui.notifications.MyWebSocketServer
 import com.photons.carrycloud.ui.notifications.NotificationsViewModel
-import com.photons.carrycloud.utils.NetworkUtils
 import com.photons.carrycloud.utils.SPUtils
 import com.photons.carrycloud.utils.SPUtils.KEY_SERVER_PORT
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
@@ -28,7 +32,6 @@ class App : Application() {
     private lateinit var mainHandler: Handler
 
     private var wsServer: MyWebSocketServer? = null
-    val accessAddresses = HashMap<String, String>()
 
     fun getRootPath(): String {
         // Android 11之后，sdcard下的文件都通过MediaStore API访问，包括Java的File类
@@ -37,19 +40,19 @@ class App : Application() {
         return cacheDir.absolutePath
     }
 
-    fun getServerPath(): String {
-        return "http://${NetworkUtils.localIPv4}:${getServerPort()}"
-    }
+//    fun getServerPath(): String {
+//        return "http://${NetworkUtils.localIPv4}:${getServerPort()}"
+//    }
 
-    fun getServerPathV6(): String {
-        val port = getServerPort()
-        val sb = StringBuilder()
-        NetworkUtils.localIPv6.forEach {
-            sb.append("http://[${it}]:$port\n")
-        }
-
-        return sb.toString()
-    }
+//    fun getServerPathV6(): String {
+//        val port = getServerPort()
+//        val sb = StringBuilder()
+//        NetworkUtils.localIPv6.forEach {
+//            sb.append("http://[${it}]:$port\n")
+//        }
+//
+//        return sb.toString()
+//    }
 
     fun getServerPort(): Int {
         return SPUtils.getInt(KEY_SERVER_PORT, Constants.HTTP_PORT)
@@ -59,16 +62,9 @@ class App : Application() {
         return "${getRootPath()}/www"
     }
 
-    fun getAllAccessAddresses():String {
-        val sb = StringBuilder()
-        accessAddresses.forEach { (t, u) ->
-            sb.append("[").append(t).append("] ").append(u).append("\n")
-        }
-        return sb.toString()
-    }
-
     fun startServer(start: Boolean) {
         Logger.debug("startServer $start")
+        Log.d("App", "startServer $start")
         if (start) {
             startForegroundService(Intent(this, WebService::class.java))
         } else {
@@ -93,26 +89,6 @@ class App : Application() {
         wsServer?.unbindViewModel()
     }
 
-    fun onNetworkChanged() {
-        if (NetworkUtils.isReady()) {
-            instance.toast(getString(R.string.network_ready, NetworkUtils.localIPv4))
-
-            instance.startServer(true)
-            instance.startWsServer()
-            LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
-        } else {
-            instance.toast(getString(R.string.network_not_ready))
-
-            instance.startServer(false)
-        }
-        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
-    }
-
-    fun onIpv6Changed(ipv6: String) {
-        // todo start ws server on ipv6 for text share
-        LiveEventBus.get<String>(Constants.NETWORK_V6_STATE_CHANGED_KEY).post(ipv6)
-    }
-
     override fun onCreate() {
         super.onCreate()
         QMUISwipeBackActivityManager.init(this)
@@ -121,7 +97,23 @@ class App : Application() {
         instance = this
         mainHandler = Handler(Looper.getMainLooper())
 
-        NetworkUtils.listenNetwork(this)
+        NetManager.listenNetwork()
+
+        LiveEventBus
+            .get(Constants.NOTIFY_ACCESS_CHANGED_KEY, String::class.java)
+            .observeForever {
+                Log.d("App", "NOTIFY_ACCESS_CHANGED $it")
+                val addr = NetManager.getFirstAccessAddresses()
+                if (NetManager.isReady()) {
+                    toast(getString(R.string.network_ready, addr))
+
+                    startServer(true)
+                    startWsServer()
+                } else {
+                    toast(getString(R.string.no_network))
+                    startServer(false)
+                }
+            }
 
         Logger.debug("onCreate")
     }
@@ -143,7 +135,6 @@ class App : Application() {
         SPUtils.putInt(KEY_SERVER_PORT, port)
 
         startServer(false)
-        LiveEventBus.get<String>(Constants.NETWORK_STATE_CHANGED_KEY).post(NetworkUtils.localIPv4)
 
         mainHandler.postDelayed({
             startServer(true)

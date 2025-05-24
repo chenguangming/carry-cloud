@@ -8,7 +8,7 @@
     <string name="send">Send</string>
     <string name="warning">Warning</string>
     <string name="modify_warning">Don\'t modify unless it you understand the operation</string>
-    <string name="wifi_disconnected">Please Connect to any WLAN or LAN first</string>
+    <string name="no_network">Please Connect Network first</string>
 
     <string name="notification_permission_toast">No notification permission</string>
     <string name="no_storage_permission_toast">No storage permission</string>
@@ -40,7 +40,9 @@
     <string name="clear_log">Clear Log</string>
     <string name="notification_title">Click to show detail</string>
     <string name="notification_text_share">Text Share</string>
-    <string name="notification_content">access content on PC browser\nfirst login: admin/123456</string>
+    <string name="tip_content">access content on PC browser\nfirst login: admin/123456</string>
+    <string name="notification_content">open %s on PC browser\nfirst login: admin/123456</string>
+    <string name="ipv6_no_dns">only IPv6, recommended to use DDNS</string>
     <string name="storage_internal">Internal Storage</string>
     <string name="grant_storage_permission">grant storage permission to manage Local Files.</string>
     <string name="grant_all_files_permission"><html><body>Since Android 11, Google requests APPs to request user permission for managing all files on the device. Details <a href="https://developer.android.com/training/data-storage/manage-all-files" target="_blank">here</a>.
@@ -53,7 +55,6 @@
     <string name="grantfailed">Permission not granted</string>
     <string name="grant_notity_permission">grant the notification permission to receive message from your PC in background.</string>
     <string name="network_ready">Serving on %s</string>
-    <string name="network_not_ready">Not in LAN</string>
     <string name="copied">copied in clipboard</string>
 
     <string name="selectNum">selected(%1$d/%2$d）</string>

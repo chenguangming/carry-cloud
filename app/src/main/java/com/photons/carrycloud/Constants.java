@@ -7,8 +7,6 @@ public class Constants {
     public static final String GLOBAL_IPV6 = "::";
 
     public static final String WORKER_PROGRESS_KEY = "percent";
-    public static final String NETWORK_STATE_CHANGED_KEY = "network.changed";
-    public static final String NETWORK_V6_STATE_CHANGED_KEY = "network.changed.v6";
     public static final String LANG_CHANGED = "lang.changed";
     public static final String STORAGE_PERMISSION_CHANGED_KEY = "storage.permission.changed";
     public static final String NOTIFY_PERMISSION_CHANGED_KEY = "notify.permission.changed";
@@ -24,8 +22,8 @@ public class Constants {
     public static final String GITHUB_URL = "https://github.com/chenguangming/carry-cloud";
     public static final String DDNS_ENTRY_URL = "http://localhost:9876";
 
-    public static final String ACCESS_TYPE_IPV4 = "IPV4";
-    public static final String ACCESS_TYPE_IPV6 = "IPV6";
-    public static final String ACCESS_TYPE_MDNS = "MDNS";
-    public static final String ACCESS_TYPE_DDNS = "DDNS";
+    public static final int ACCESS_TYPE_MDNS = 0;
+    public static final int ACCESS_TYPE_IPV4 = 1;
+    public static final int ACCESS_TYPE_DDNS = 2;
+    public static final int ACCESS_TYPE_IPV6 = 3;
 }
