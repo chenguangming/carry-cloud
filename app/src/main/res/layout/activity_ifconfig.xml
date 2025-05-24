@@ -32,17 +32,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp">
-
-            <ScrollView
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/networks"
+                    android:id="@+id/currentLink"
                     android:layout_margin="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-            </ScrollView>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/networks"
+                        android:layout_margin="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </ScrollView>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

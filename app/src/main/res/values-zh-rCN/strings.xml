@@ -113,6 +113,7 @@
     <string name="modify_warning">除非你知道在自己做什么，否则不要修改任何配置</string>
     <string name="no_network">请先连接网络</string>
     <string name="show_all_netcards">查看本机所有网卡信息</string>
+    <string name="cur_netcard">当前使用:\n%s</string>
     <string name="about_detail"><![CDATA[
         <b>CarryCloud</b> 支持将PHP服务运行在安卓手机，自带KodBox开源版本，并可直接管理云盘以外的手机文件，云盘服务也可替换为NextCloud等。个人撸码不易，感谢支持！\n
         <a href="https://github.com/chenguangming/carry-cloud">Github</a>.<br/><br/>

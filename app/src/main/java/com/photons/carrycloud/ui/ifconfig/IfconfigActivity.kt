@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MenuItem
 import com.photons.carrycloud.R
 import com.photons.carrycloud.databinding.ActivityIfconfigBinding
+import com.photons.carrycloud.net.NetManager
 import com.qmuiteam.qmui.arch.QMUIActivity
 import com.qmuiteam.qmui.skin.QMUISkinManager
 
@@ -102,6 +103,7 @@ class IfconfigActivity : QMUIActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.show_all_netcards)
 
+        binding.currentLink.text = getString(R.string.cur_netcard, NetManager.getAllAccessAddresses())
         binding.networks.text = getAllNetworksInfo()
     }
 }

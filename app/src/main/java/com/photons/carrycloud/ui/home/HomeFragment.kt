@@ -343,11 +343,11 @@ class HomeFragment : Fragment() {
             .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 addItemView(serverSwitch, null)
                 addItemView(phoneVisible, onPhoneVisibleClicked)
+                addItemView(showAllNets, onShowAllNetsClicked)
                 addItemView(accessOverInternet, onAccessOverInternetClicked)
                 addItemView(serverExport, onServerExportClicked)
                 addItemView(serverImport, onServerImportClicked)
                 addItemView(advanceSettings, onAdvanceSettingsClicked)
-                addItemView(showAllNets, onShowAllNetsClicked)
                 addItemView(about, onAboutClicked)
             }
             .setMiddleSeparatorInset(QMUIDisplayHelper.dp2px(context, 8), 0)
