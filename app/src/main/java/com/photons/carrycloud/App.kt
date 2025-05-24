@@ -28,6 +28,7 @@ class App : Application() {
     private lateinit var mainHandler: Handler
 
     private var wsServer: MyWebSocketServer? = null
+    val accessAddresses = HashMap<String, String>()
 
     fun getRootPath(): String {
         // Android 11之后，sdcard下的文件都通过MediaStore API访问，包括Java的File类
@@ -56,6 +57,14 @@ class App : Application() {
 
     fun getServerRoot(): String {
         return "${getRootPath()}/www"
+    }
+
+    fun getAllAccessAddresses():String {
+        val sb = StringBuilder()
+        accessAddresses.forEach { (t, u) ->
+            sb.append("[").append(t).append("] ").append(u).append("\n")
+        }
+        return sb.toString()
     }
 
     fun startServer(start: Boolean) {

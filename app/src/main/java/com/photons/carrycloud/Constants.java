@@ -12,6 +12,7 @@ public class Constants {
     public static final String LANG_CHANGED = "lang.changed";
     public static final String STORAGE_PERMISSION_CHANGED_KEY = "storage.permission.changed";
     public static final String NOTIFY_PERMISSION_CHANGED_KEY = "notify.permission.changed";
+    public static final String NOTIFY_ACCESS_CHANGED_KEY = "notify.access.changed";
 
     public static final String HTTP_SERVER_CHANGED_KEY = "http.server.state";
     public static final String NEED_WAITING = "need.waiting";
@@ -22,4 +23,9 @@ public class Constants {
     public static final String HELP_URL = "https://lightings.gitee.io/";
     public static final String GITHUB_URL = "https://github.com/chenguangming/carry-cloud";
     public static final String DDNS_ENTRY_URL = "http://localhost:9876";
+
+    public static final String ACCESS_TYPE_IPV4 = "IPV4";
+    public static final String ACCESS_TYPE_IPV6 = "IPV6";
+    public static final String ACCESS_TYPE_MDNS = "MDNS";
+    public static final String ACCESS_TYPE_DDNS = "DDNS";
 }

@@ -31,7 +31,7 @@
     <string name="about">关于</string>
     <string name="notification_title">点击查看详情</string>
     <string name="notification_text_share">文本分享</string>
-    <string name="notification_content">局域网访问 %s 进入携云空间\n初始帐号密码：admin/123456</string>
+    <string name="notification_content">使用电脑浏览器访问您的云盘\n初始帐号密码：admin/123456</string>
     <string name="storage_internal">内部存储</string>
     <string name="grant_storage_permission">授予存储权限可以管理本地文件</string>
     <string name="grant_all_files_permission"><html><body>Android 11之后, 要求所有需要访问内部存储文件的应用都要申请权限.
@@ -101,7 +101,6 @@
     <string name="open_with">打开到</string>
     <string name="yes">是的</string>
     <string name="no">不是</string>
-    <string name="support_ipv6">支持IPv6\n%s</string>
     <string name="monofont">Monospace Font</string>
     <string name="root_path">存储</string>
     <string name="title_activity_splash">开屏</string>

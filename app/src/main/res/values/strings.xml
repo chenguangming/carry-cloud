@@ -40,7 +40,7 @@
     <string name="clear_log">Clear Log</string>
     <string name="notification_title">Click to show detail</string>
     <string name="notification_text_share">Text Share</string>
-    <string name="notification_content">open %s\n on PC in same LAN\ninitial username: admin\npassword: 123456</string>
+    <string name="notification_content">access content on PC browser\nfirst login: admin/123456</string>
     <string name="storage_internal">Internal Storage</string>
     <string name="grant_storage_permission">grant storage permission to manage Local Files.</string>
     <string name="grant_all_files_permission"><html><body>Since Android 11, Google requests APPs to request user permission for managing all files on the device. Details <a href="https://developer.android.com/training/data-storage/manage-all-files" target="_blank">here</a>.
@@ -118,7 +118,6 @@
     <string name="no_thanks">No Thanks</string>
     <string name="monofont">Monospace Font</string>
     <string name="root_path">Storage</string>
-    <string name="support_ipv6">IPv6 supported.\n%s</string>
 
     <!-- ftp -->
     <string name="ftp_error_AVBL.notimplemented" translatable="false">Command not implemented for AndroidFileSystem.</string>

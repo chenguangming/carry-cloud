@@ -35,12 +35,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/ipv6_addr"
+        android:id="@+id/my_addr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/prepare_cloud_env_need"
+        android:gravity="left"
+        android:layout_margin="16dp"
         android:textColor="@color/app_color_description"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/usage_text"

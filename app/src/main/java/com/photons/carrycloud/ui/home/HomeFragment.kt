@@ -1,11 +1,11 @@
 package com.photons.carrycloud.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +26,6 @@ import com.photons.carrycloud.Constants.DDNS_ENTRY_URL
 import com.photons.carrycloud.Constants.GITHUB_URL
 import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.GLOBAL_IPV6
-import com.photons.carrycloud.Constants.HELP_URL
 import com.photons.carrycloud.databinding.FragmentHomeBinding
 import com.photons.carrycloud.service.HttpServerState
 import com.photons.carrycloud.service.WebService
@@ -271,6 +270,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initGroupListView() {
         val serverSwitch = binding.groupListView.createItemView(App.instance.getServerPath())
         serverSwitch.detailText = getString(R.string.stopped)
@@ -304,14 +304,9 @@ class HomeFragment : Fragment() {
 
 
         LiveEventBus
-            .get(Constants.NETWORK_V6_STATE_CHANGED_KEY, String::class.java)
+            .get(Constants.NOTIFY_ACCESS_CHANGED_KEY, String::class.java)
             .observeSticky(this) {
-                if (it == GLOBAL_IPV6) {
-                    binding.ipv6Addr.visibility = View.GONE
-                } else {
-                    binding.ipv6Addr.text = getString(R.string.support_ipv6, App.instance.getServerPathV6())
-                    binding.ipv6Addr.visibility = View.VISIBLE
-                }
+                binding.myAddr.text = App.instance.getAllAccessAddresses()
             }
 
         LiveEventBus
@@ -329,7 +324,7 @@ class HomeFragment : Fragment() {
                 serverSwitch.switch.isChecked = it.isStarted
 
                 binding.usageText.text = if (it.isStarted) {
-                    getString(R.string.notification_content, App.instance.getServerPath())
+                    getString(R.string.notification_content)
                 } else if (it.errNo != 0) {
                     getString(R.string.error_desc)
                 } else {

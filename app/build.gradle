@@ -111,6 +111,7 @@ dependencies {
     implementation "com.tencent.bugly:crashreport:$buglyVersion"
 
     implementation "net.lingala.zip4j:zip4j:2.11.5"
+    implementation 'org.jmdns:jmdns:3.6.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
