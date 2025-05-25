@@ -1,4 +1,4 @@
-package com.photons.carrycloud.ui.home
+package com.photons.carrycloud.ui.more
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -24,8 +24,7 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.photons.bus.LiveEventBus
 import com.photons.carrycloud.*
 import com.photons.carrycloud.Constants.DDNS_ENTRY_URL
-import com.photons.carrycloud.Constants.GITHUB_URL
-import com.photons.carrycloud.databinding.FragmentHomeBinding
+import com.photons.carrycloud.databinding.FragmentMoreBinding
 import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.service.HttpServerState
 import com.photons.carrycloud.service.WebService
@@ -47,9 +46,9 @@ import org.slf4j.LoggerFactory
 import java.text.DecimalFormat
 
 
-class HomeFragment : Fragment() {
+class MoreFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentMoreBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -68,7 +67,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         initGroupListView()

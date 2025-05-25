@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.photons.carrycloud.ui.home.HomeFragment"
+        android:name="com.photons.carrycloud.ui.home.HomeGridFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_grid_home" >
     </fragment>
 
     <fragment
@@ -17,4 +17,11 @@
         android:name="com.photons.carrycloud.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_more"
+        android:name="com.photons.carrycloud.ui.more.MoreFragment"
+        android:label="@string/title_more"
+        tools:layout="@layout/fragment_more" >
+    </fragment>
 </navigation>

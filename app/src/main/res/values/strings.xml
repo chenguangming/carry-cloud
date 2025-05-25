@@ -2,6 +2,7 @@
     <string name="app_name">CarryCloud</string>
     <string name="slogan">Carry Cloud In Pocket</string>
     <string name="title_home">Home</string>
+    <string name="title_more">More</string>
     <string name="title_notifications">Text</string>
     <string name="hex">HEX</string>
     <string name="send_input_hint">Send Text to PC</string>

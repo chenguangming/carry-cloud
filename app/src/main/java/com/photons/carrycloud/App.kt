@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.photons.bus.LiveEventBus
@@ -13,8 +12,6 @@ import com.photons.carrycloud.Constants.GLOBAL_IPV4
 import com.photons.carrycloud.Constants.WS_PORT
 import com.photons.carrycloud.net.NetManager
 import com.photons.carrycloud.service.WebService
-import com.photons.carrycloud.ui.home.HomeFragment
-import com.photons.carrycloud.ui.home.HomeFragment.Companion
 import com.photons.carrycloud.ui.notifications.MyWebSocketServer
 import com.photons.carrycloud.ui.notifications.NotificationsViewModel
 import com.photons.carrycloud.utils.SPUtils
