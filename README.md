@@ -10,10 +10,12 @@
 1.  Ensure both the mobile device and PC are connected to the same local network.
 2.  Keep the app running in the foreground after opening.
 3.  Follow the prompts to enter the URL in the PC browser.
+4.  For mobile cellular networks, DDNS access to IPv6 can be configured as needed
 
 #### Feature Plan
 1. [x]  Scan QR code to connect
 2. [x]  Internet network access
+2. [ ]  Service Package Store
 
 #### Screenshots
 <p>
