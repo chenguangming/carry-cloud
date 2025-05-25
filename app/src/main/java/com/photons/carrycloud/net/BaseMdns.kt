@@ -1,9 +1,7 @@
 package com.photons.carrycloud.net
 
 import com.photons.bus.LiveEventBus
-import com.photons.carrycloud.App
 import com.photons.carrycloud.Constants
-import java.net.InetAddress
 
 abstract class BaseMdns {
     val MDNS_SERVICE_NAME: String = "cc"
@@ -14,7 +12,12 @@ abstract class BaseMdns {
     abstract fun stop()
 
     private fun getDomain(name: String): String {
-        return "$name.local"
+        if (name.endsWith('.')) {
+            // jmdns 看到的域名是 cc-1.local. 这样的，实测要把最后的.去掉
+            return name.substring(0, name.lastIndexOf('.'))
+        }
+
+        return name
     }
 
     fun onDiscoveryMySelf(address: String, hostName: String) {

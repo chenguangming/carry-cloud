@@ -1,14 +1,15 @@
 package com.photons.carrycloud.net
 
+import android.text.TextUtils
 import android.util.Log
 import com.photons.carrycloud.Constants.HTTP_PORT
 import java.io.IOException
-import java.net.Inet4Address
 import java.net.InetAddress
 import javax.jmdns.JmDNS
 import javax.jmdns.ServiceEvent
 import javax.jmdns.ServiceInfo
 import javax.jmdns.ServiceListener
+import javax.jmdns.impl.JmDNSImpl
 
 
 object JavaMdns: ServiceListener, BaseMdns() {
@@ -69,12 +70,14 @@ object JavaMdns: ServiceListener, BaseMdns() {
     }
 
     override fun serviceResolved(event: ServiceEvent) {
-        Log.d(TAG, "Service resolved: " + event.info)
-        Log.d(TAG, "Service resolved name: " + event.name)
-        Log.d(TAG, "Service resolved addr: " + NetManager.formatAddress(event.dns.inetAddress))
-        if (event.dns.inetAddress.hostAddress?.equals(myAddress) == true) {
-            Log.d(TAG, "Service resolved myself")
-            onDiscoveryMySelf(myAddress!!, event.name)
+        Log.d(TAG, "Service resolved: " + event.dns)
+
+        val hostAddress = (event.dns as JmDNSImpl).localHost.inetAddress?.hostAddress
+        val hostName = (event.dns as JmDNSImpl).localHost.name
+
+        if (!TextUtils.isEmpty(hostAddress)) {
+            Log.d(TAG, "Service localHost $hostName : $hostAddress ")
+            onDiscoveryMySelf(hostAddress!!, hostName)
         }
     }
 }
