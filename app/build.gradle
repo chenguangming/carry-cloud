@@ -73,6 +73,26 @@ android {
             useLegacyPackaging = true
         }
     }
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def appName = "carrycloud"
+            def abi = output.getFilter(com.android.build.OutputFile.ABI) // 获取 ABI，如 arm64-v8a
+            if (variant.buildType.name == "release") {
+                def versionName = variant.versionName // 获取版本号，例如 "2.1.0"
+                if (abi != null) {
+                    output.outputFileName = "${appName}-${abi}-release-v${versionName}.apk"
+                } else {
+                    output.outputFileName = "${appName}-release-v${versionName}.apk"
+                }
+            } else {
+                if (abi != null) {
+                    output.outputFileName = "${appName}-${abi}-debug.apk"
+                } else {
+                    output.outputFileName = "${appName}-debug.apk"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
